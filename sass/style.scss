@@ -1,0 +1,978 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+*{
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    border: none; outline: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: 'Roboto Condensed', sans-serif;
+    transition: .2s linear;
+}
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar{
+        width: 1rem;
+    }
+    &::-webkit-scrollbar-track{
+        background: #000;
+        border-radius: 20rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background: #000;
+    }
+}
+
+$green: #219150;
+$black: #10221b;
+$white: #fff;
+$light-bg: #eee;
+$border: .2rem solid $black;
+$box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+
+@mixin green {
+    color: $green;
+    cursor: pointer;
+}
+@mixin button($par1){
+    padding: .8rem 2.8rem;
+    border: .2rem solid #000;
+    color: #000;
+    font-size: 1.7rem;
+    background: transparent;
+    cursor: pointer;
+    margin-top: $par1;
+
+    &:hover{
+        background: #000;
+        color: $white;
+    }
+}
+@mixin diff{
+    padding: .8rem 2.8rem;
+    font-size: 1.5rem;
+    color: #000;
+    border: .2rem solid #000;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    border-radius: .3rem;
+
+    &::before{
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 0%;
+        top: 0; right: 0;
+        transition: all .2s linear;
+        background: $white;
+        z-index: -1;
+        border-radius: .1rem;
+    }
+    &:hover::before{
+        width: 100%;
+        left: 0;
+    }
+    &:hover{
+        color: #000;
+        z-index: 1;
+    }
+
+}
+@mixin offerbtn{
+    padding: .8rem 2rem;
+    border: .2rem solid #000;
+    border-radius: .5rem;
+    color: #000;
+    font-size: 1.7rem;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover{
+        border: .2rem solid $white;
+        background: $white;
+        color: #000;
+    }   
+}
+
+section{
+    padding: 2rem 9%;
+}
+.heading{
+    text-align: center;
+    font-size: 4rem;
+    margin: 1.5rem 0;
+}
+
+// Header Section CSS
+header.head{
+    position: fixed;
+    width: 100%;
+    height: 12vh;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 9%;
+
+    a.logo{
+        font-weight: 600;
+        font-size: 2.3rem;
+        color: $black;
+
+        i{
+            color: $green;
+        }
+    }
+
+    .right{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 1.5rem;
+        font-size: 1.6rem;
+
+        .menu-bar{
+            display: none;
+
+            &:hover{
+                @include green();
+            }
+        }
+        nav.navbar a{
+            margin-right: 1.2rem;
+            color: $black;
+
+            &:hover{
+                @include green();
+            }
+            &:nth-child(6){
+                margin-right: 0;
+            }
+        }
+        .cart i{
+            font-size: 2rem;
+
+            &:hover{
+                @include green();
+            }
+        }
+        .search i{
+            font-size: 2rem;
+            &:hover{
+                @include green();
+            }
+        }
+    }
+    .fa-times{
+        transform: rotate(180deg);
+    }
+}
+header.head.overpowered{
+    background: $white;
+    box-shadow: $box-shadow;
+}
+
+// Home Section CSS
+div.home{
+    .slide-container{
+        display: none;
+        .slide{
+
+            .image_text{
+                position: relative;
+                img{
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    width: 100%;
+                    height: 100vh;
+                }
+                .text.unique{
+                    position: absolute;
+                    content: '';
+                    top: 47%; left: 50%;
+                    transform: translate(-83%, -50%);
+                }
+                .text{
+                    position: absolute;
+                    content: '';
+                    top: 47%; left: 50%;
+                    transform: translate(5%, -50%);
+
+                    h1{
+                        font-size: 6rem;
+                        font-weight: 500;
+                        color: $black;
+
+                        span{
+                            color: $green;
+                            display: block;
+                            margin-top: 1rem;
+                            font-weight: 700;
+                        }
+                    }
+                    p{
+                        margin: 1rem 0;
+                        line-height: 1.8;
+                        font-size: 1.3rem;
+                        color: $black;
+                        width: 80%
+                    }
+                    .btn{
+                        @include button(.5rem);
+                    }
+                }
+            }
+        }
+    }
+    .slide-container.hide{
+        display: block;
+    }
+    .next i,
+    .prev i{
+        font-size: 3rem;
+        position: absolute;
+        top: 50%;
+
+        &:hover{
+            @include green();
+        }
+    }
+    .next i{
+        right: 1.5rem;
+    }
+    .prev i{
+        left: 1.5rem;
+    }
+}
+
+// About Section CSS
+section.about{
+    .adventure-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+        margin: 4rem 0;
+
+        .idea{
+            text-align: center;
+
+            h4{
+                margin: 1rem 0;
+                color: $green;
+                font-size: 1.8rem;
+            }
+            p{
+                width: 55%;
+                margin: auto;
+                line-height: 1.6;
+                font-size: 1.2rem;
+            }
+            button.btn{
+                @include button(1rem);
+                padding: .4rem 1.2rem;
+            }
+
+            img{
+                height: 28vh;
+                width: 63%;
+                border-radius: 50%;
+                margin: auto;
+            }
+        }
+    }
+}
+div#about{
+    .about-container{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        background: $light-bg;
+
+        .about-img{
+            flex: 1 1 42rem;
+            position: relative;
+            margin-bottom: 3rem;
+            
+            img{
+                width: 89%;
+                padding: 3rem 5rem;
+            }
+            .after{
+                position: absolute;
+                content: '';
+                height: 3rem;
+                width: 47rem;
+                background: #cdcdcd;
+                top: 92.7%;
+                left: 7rem;
+            }
+            .afters{
+                position: absolute;
+                content: '';
+                height: 38rem;
+                width: 3.2rem;
+                background: #cdcdcd;
+                top: 12.7%;
+                left: 50.8rem;
+            }
+        }
+        .about-text{
+            flex: 1 1 42rem;
+
+            h2{
+                font-size: 3rem;
+                margin: 1rem 0;
+                color: $green;
+            }
+            p.top{
+                line-height: 1.5;
+                font-size: 1.2rem;
+                width: 86%;
+                margin: 1rem 0;
+                color: $black;
+            }
+            p.bottom{
+                line-height: 1.5;
+                font-size: 1.2rem;
+                width: 86%;
+                margin: 1.5rem 0;
+                color: $black;   
+            }
+            button.btn{
+                @include button(.5rem);
+                padding: .5rem 2.5rem;
+            }
+        }
+    }
+}
+
+// Product Section CSS
+section.product{
+    .product-slider{
+        overflow: hidden;
+
+        .wrapper{
+
+            .product{
+                width: 19%;
+                border: $border;
+
+                &:hover .extra{
+                    transform: scale(1);
+                }
+
+                h3{
+                    text-align: center;
+                    margin: .5rem 0;
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                }
+                span{
+                    font-size: 1.3rem;
+                    display: block;
+                    text-align: center;
+                    margin: 0.5rem 0;
+                    color: #219150;
+                    font-weight: 600;
+                }
+                .items{
+                    margin: 1rem 0;
+                    text-align: center;
+
+                    i{
+                        font-size: 1.2rem;
+                    }
+                }
+                img{
+                    width: 100%;
+                    height: 37vh;
+                    object-fit: cover;
+                }
+                .extra{
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+                    bottom: 84px;
+                    left: 31%;
+                    transform-origin: bottom;
+                    transform: scale(0);
+                    
+                    span{
+                        height: 2.5rem;
+                        width: 2.5rem;
+                        margin-right: 0.4rem;
+                        background: #000;
+                        display: block;
+                        cursor: pointer;
+
+                        &:hover{
+                            background: $green;
+                        }
+    
+                        i{
+                            line-height: 1.8;
+                            color: #fff;
+                            font-size: 1.5rem;
+                            margin-left: 0.1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.swiper .swiper-button-next::after{
+    font-size: 3.5rem;
+    color: #000;
+}
+.swiper .swiper-button-prev::after{
+    font-size: 3.5rem;
+    color: #000;
+}
+
+// Packages Section CSS
+section.packages{
+    background: $light-bg;
+
+    .packages-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+        
+
+        .package{
+            width: 96%;
+            background: $white;
+            border: $border;
+            padding: 1.5rem;
+            border-radius: .3rem;
+            margin: .5rem 0;
+
+            &:hover{
+                background: #000;
+            }
+            &:hover h4,
+            &:hover p{
+                color: $white;
+            }
+
+            &:hover .inner button.diff{
+                border: .2rem solid #fff;
+                color: #fff;
+            }
+    
+            .inner{
+    
+                h4{
+                    margin: 1rem 0;
+                    text-align: center;
+                    font-size: 2rem;
+                }
+                P{
+                    text-align: center;
+                    line-height: 1.5;
+                    width: 87%;
+                    margin: auto;
+                }
+                span{
+                    display: block;
+                    text-align: center;
+                    margin: 1rem 0;
+                    font-size: 2rem;
+                    color: $green;
+                }
+                button.diff{
+                    @include diff();
+                    margin: auto;
+                    display: block;
+                }
+                img{
+                    width: 100%;
+                    border-radius: .3rem;
+                }
+            }
+        }
+    }
+}
+
+// Review Section CSS
+section.review{
+    .review-slider{
+        margin-top: -3rem;
+
+        .review-wrapper{
+            padding: 4rem 0;
+
+            .review{
+                width: 27%;
+
+                .txt{
+                    padding: 1rem;
+                    text-align: justify;
+                    line-height: 1.7;
+                    background: #eee;
+                    border-radius: 1rem;
+                    position: relative;
+
+                    &::after{
+                        top: 92%;
+                        position: absolute;
+                        content: '';
+                        width: 2rem;
+                        height: 2rem;
+                        background: #eee;
+                        transform: rotate(45deg);
+                        left: 3rem;
+                    }
+
+                    p{
+                        font-size: 1.2rem;
+                    }
+                }
+                .client{
+                    display: flex;
+                    align-items: center;
+                    gap: .2rem;
+                    flex-wrap: wrap;
+
+
+                    img{
+                        width: 22%;
+                        border-radius: 52%;
+                        margin: 1.5rem 1rem;
+                    }
+                    p{
+                        font-size: 1.6rem;
+                    }
+                    span{
+                        display: block;
+                        margin: .5rem 0;
+                        color: $green;
+                        font-weight: 700;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+section.review .swiper .swiper-pagination-bullet{
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    border-radius: 0;
+    background: $green;
+}
+
+// Offer Section CSS
+section.offer{
+    background: $light-bg;
+
+    .offer-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+
+        .offer{
+            border: 0.2rem solid #000;
+            width: 97%;
+            padding: 1.5rem;
+            background: $white;
+            border-radius: .5rem;
+            margin: 1rem 0;
+
+            &:hover{
+                background: #000;
+            }
+            &:hover img{
+                color: $green;
+            }
+            &:hover p{
+                color: $white;
+            }
+            &:hover button.btn{
+                border: .2rem solid $white;
+                color: $white;
+            }
+
+
+            img{
+               display: block;
+               margin: auto;
+            }
+            h2{
+                text-align: center;
+                margin: 1rem 0;
+                color: $green;
+                font-size: 1.8rem;
+            }
+            p{
+                text-align: center;
+                font-size: 1.3rem;
+                line-height: 1.7;
+                margin: 1rem 0;
+            }
+            button.btn{
+                display: block;
+                margin: auto;
+                @include offerbtn();
+            }
+        }
+    }
+}
+
+// Blog Section CSS
+section.blog{
+    .blogs-container{
+        margin: 2rem 0;
+        .blog{
+            width: 29%;
+    
+            img{
+                width: 100%;
+                border-radius: .5rem;
+            }
+            .date-time{
+                display: inline-flex;
+                gap: 1.5rem;
+                border: .2rem solid #000;
+                background: #000;
+                padding: .5rem;
+                border-radius: .5rem;
+                margin-left: 9rem;
+                margin-top: -40rem;
+    
+                .date{
+                    color: $white;
+                    margin-left: .4rem;
+    
+    
+                    i{
+                        color: $green;
+                    }
+                }
+                .time{
+                    color: $white;
+                    margin-left: .4rem;
+    
+    
+                    i{
+                        color: $green;
+                    }
+                }
+            }
+            .title h3{
+                font-weight: 500;
+                text-align: center;
+                margin: 1rem 0;
+                font-size: 2rem;
+            }
+            p{
+                text-align: center;
+                font-size: 1.2rem;
+                line-height: 1.5;
+                margin: 1rem 0
+            }
+            button.btn{
+                @include button(0rem);
+                display: block;
+                margin: auto;
+            }
+        }
+    }
+}
+
+// Subscribe Section CSS
+section.subscribe{
+    background: url(../images/bg.jpeg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    object-fit: cover;
+    height: 60vh;
+
+    .heading{
+        color: $white;
+        margin-top: 6.5rem;
+    }
+
+    p{
+        text-align: center;
+        line-height: 1.7;
+        font-size: 1.3rem;
+        width: 59%;
+        margin: auto;
+        color: $white;
+    }
+    .subs{
+        border: 0.2rem solid $white;
+        text-align: center;
+        margin: auto;
+        width: 45%;
+        padding: 1rem;
+        border-radius: 22rem;
+        margin-top: 1.5rem;
+
+        input{
+            width: 76%;
+            background: none;
+            border-bottom: 0.2rem solid $white;
+            margin-right: 1.2rem;
+            padding-left: .5rem;
+            padding: .5rem;
+            color: $white;
+            font-size: 1.5rem;
+        }
+        button#sub{
+            padding: 0.8rem 2rem;
+            border-radius: 20rem;
+            background: $white;
+            color: $black;
+            cursor: pointer;
+        }
+    }
+}
+
+// L0go Section CSS
+section.logo{
+    height: 50vh;
+    .logo-container{
+        margin: 5rem 0;
+
+        img{
+            width: 100%;
+        }
+    }
+}
+
+// Footer Section CSS
+section.footer{
+    background: url(../images/footer-bg.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    .footer-container{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+
+        .first{
+
+            h2{
+                font-size: 2.5rem;
+                margin: 1rem 0;
+                color: $white;
+            }
+            a{
+                display: block;
+                font-size: 1.8rem;
+                color: $white;
+                margin: 1rem 0;
+                font-weight: 300;
+            }
+        }
+        .second{
+
+            h2{
+                font-size: 2.5rem;
+                margin: 1rem 0;
+                color: $white;
+            }
+            a{
+                display: block;
+                font-size: 1.8rem;
+                color: $white;
+                margin: 1rem 0;
+                font-weight: 300;
+            }
+        }
+        .third{
+            h2{
+                font-size: 2.5rem;
+                margin: 1rem 0;
+                color: $white;
+            }
+            a{
+                display: block;
+                font-size: 1.8rem;
+                color: $white;
+                margin: 1rem 0;
+                font-weight: 300;
+
+                &:hover i{
+                    margin-right: 1rem;
+                }
+
+                i{
+                    color: $green;
+                    margin-right: .3rem;
+                }
+            }
+        }
+        .fourth{
+            h2{
+                font-size: 2.5rem;
+                margin: 1rem 0;
+                color: $white;
+            }
+            a{
+                display: block;
+                font-size: 1.8rem;
+                color: $white;
+                margin: 1rem 0;
+                font-weight: 300;
+
+                &:hover i{
+                    margin-right: 1rem;
+                }
+
+                i{
+                    color: $green;
+                    margin-right: .3rem;
+                }
+            }
+        }
+    }
+    .credit p{
+        font-size: 2.5rem;
+        color: #fff;
+        margin: 1.5rem 0;
+        text-align: center;
+
+        span{
+            color: $green;
+        }
+    }
+}
+
+
+
+// Scroller 
+.scroller{
+    position: absolute;
+    border: 0.2rem solid #fff;
+    display: block;
+    width: 4%;
+    padding: 1.5rem;
+    top: 939%;
+    right: 7rem;
+    color: #fff;
+    cursor: pointer;
+
+    a{
+        color: #fff;
+    }
+    i{
+        margin: auto;
+        font-size: 3rem;
+    }
+}
+
+
+
+// Media Queries
+@media (max-width: 1024px){
+    div#about .after,
+    div#about .afters{
+        display: none;
+    }
+}
+@media (max-width: 991px){
+    html{
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 768px){
+    header.head .right .menu-bar{
+        display: block;
+    }
+    header{
+        padding: 2rem;
+    }
+    header.head .right nav.navbar{
+        position: absolute;
+        content: '';
+        top: 100%; left: 0; right: 0;
+        background: $white;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+
+        a{
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            color: $black;
+            border: $border;
+            border-bottom-width: .3rem;
+            border-radius: .5rem;
+            margin: 1rem;
+
+            &:nth-child(6){
+                margin-right: 1rem;
+            }
+
+            &:hover{
+                border: .2rem solid $green;
+                color: $green;
+                border-bottom-width: .3rem;
+            }
+        }
+    }
+    header.head .right nav.navbar.active{
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+    section.about .adventure-container .idea{
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 450px){
+    .next i,
+    .prev i{
+        display: none;
+    }
+    div.home .slide-container .slide .image_text .text h1{
+        font-size: 3.5rem;
+    }
+    div.home .slide-container .slide .image_text .text p{
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+    div.home .slide-container .slide .image_text .text button.btn{
+        padding: .4rem 1.8rem;
+    }
+    div#about .about-container .about-img img{
+        width: 100%;
+    }
+    div#about .about-container .about-text{
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    div#about .about-container .about-text p.top,
+    div#about .about-container .about-text p.bottom{
+        width: 99%;
+        margin: auto;
+        padding: 1rem 0;
+    }
+    section.logo .logo-container{
+        margin: 2rem 0;
+    }
+    section.subscribe .heading{
+        margin-top: 1.5rem;
+        color: $black;
+    }
+    section.subscribe p{
+        line-height: 1.2;
+        width: 81%;
+    }
+    section.subscribe .subs{
+        width: 97%;
+        padding: 0.5rem
+    }
+    section.subscribe .subs button#sub{
+        margin-top: 1rem;
+    }
+}
